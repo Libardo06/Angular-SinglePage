@@ -1,0 +1,52 @@
+<!-- FORMULARIO DE INGRESO -->
+<div class="signin text-center" *ngIf="!login">
+
+
+    <form action="" class="form-signin was-validated" (ngSubmit)="onSubmit(f)" #f="ngForm" novalidate>
+
+        <h3 class="mb-3 font-weight-normal">Login</h3>
+        
+        <div class="form-group">
+          
+          <input type="text" class="form-control mt-3" placeholder="Usuario" name="userLogin" [(ngModel)]="usuario" pattern="(?=.[A-Za-z]).{2,10}" #usuarioLogin="ngModel" required>
+          <div class="invalid-feedback" *ngIf="!usuarioLogin.valid && usuarioLogin.touched">Error en el campo Usuario</div>
+          <div class="invalid-feedback" *ngIf="usuarioLogin.errors?.['required'] && usuarioLogin.touched">Este campo es obligatorio</div>
+        </div>
+
+        <div class="form-group">
+          
+            <input type="password" class="form-control mt-3" placeholder="Contraseña" name="passLogin" [(ngModel)]="password" #passLogin="ngModel" required>
+            <div class="invalid-feedback" *ngIf="!passLogin.valid && passLogin.touched">Error en el campo Usuario</div>
+            <div class="invalid-feedback" *ngIf="passLogin.errors?.['required'] && passLogin.touched">Este campo es obligatorio</div>
+
+            
+        </div>
+        <div class="alert alert-danger" *ngIf="message_error_login">Usuario y contraseña incorrectos</div>
+
+        <button [disabled]="!f.valid" class="btn btn-lg btn-primary btn-block mt-3">Ingresar</button>
+    </form>
+</div>
+<!-- LECTURA DE ACTICULO -->
+<article *ngIf="login">
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-3">Fluid jumbo heading</h1>
+        <p class="lead">Jumbo helper text</p>
+        <hr class="my-2">
+        <p>More info</p>
+        <p class="lead">
+            <a class="btn btn-primary " routerLink="" role="button">Regresar</a>
+        </p>
+    </div>
+</div>
+
+<div class="container">
+
+    
+    <div [innerHTML]="contenidoArticulo"> </div>
+   
+</div>
+    
+</article>
